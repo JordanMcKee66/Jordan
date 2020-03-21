@@ -70,17 +70,18 @@ public class myPolygons{
 			tempNode.setNext(current);
 			tempNode.setPrevious(tempCurrent);
 			nodeCount++;
-			if (current == sentinel){
-				sentinel = tempNode;
+			current = current.getPrevious();
+			if (getPosition(current) == 1){
+				sentinel = current;
 			}
 		}
 	}
 	
 	//Method remove -- removes the node in the position that matches the int parameter
 	public void remove(int position){
-		if (position > nodeCount || position <= 0){
+		if (position > nodeCount{
 			System.out.println("Error: no node found");
-		}else {
+		}else{
 		currentReset();
 		while (getPosition(current) != position){
 			current = current.getNext();
@@ -93,6 +94,7 @@ public class myPolygons{
 		nodeCount--;
 		currentReset();
 		}
+
 	}
 	
 	//Method currentReset -- makes current = sentinel (returns to position 1)
@@ -104,10 +106,9 @@ public class myPolygons{
 	public void sort(){
 		currentReset();
 		node key;
-		for(int i = 0; i < nodeCount; i++){
+		for(int i = 1; i < nodeCount; i++){
 			key = current.getNext();
 			//Current incriments forward until a smaller node is located on its right, key is held as smaller node
-//			while (current.getPoly().comesBefore(key.getPoly())){
 			while (current.getArea() <= key.getArea()){
 				current = key;
 				key = current.getNext();
@@ -121,7 +122,6 @@ public class myPolygons{
 				break;
 			}
 			//Current incriments backwards until a smaller node then key is found in position current
-//			while (key.getPoly().comesBefore(current.getPoly())){
 			while (key.getArea() <= current.getArea()){
 				//if current is sentinel then current cannot incriment further, key is inserted on the left of current (into position 1) and loop is broken
 				if (current == sentinel){
@@ -143,14 +143,13 @@ public class myPolygons{
 	//Method getPosition -- returns the position of the node given as parameter in the linked list
 	public int getPosition(node n){
 		node tempNode = sentinel;
-		for (int i = 1; i <= nodeCount; i++){
+		for (int i = 1; i < nodeCount; i++){
 			if (tempNode == n){
 				return i;
 			}else {
 				tempNode = tempNode.getNext();
 			}
 		}
-		System.out.println("error in getPosition");
 		return 1; //to prevent compiling error -- no return statement
 	}
 	
